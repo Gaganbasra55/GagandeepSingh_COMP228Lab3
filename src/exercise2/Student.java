@@ -26,4 +26,5 @@ public abstract class Student {
 
     //Abstract methods
     public abstract double calculateTuition();
+    public abstract String displayInfo();
 }
