@@ -5,7 +5,7 @@ public abstract class Student {
     //student name
     private final String name;
 
-    //full time part time status 
+    //full time part time status
     private boolean status;
 
     //Constructor
@@ -13,4 +13,17 @@ public abstract class Student {
         this.name = name;
         this.status = status;
     }
+
+    //Getter methods
+    public String getName() {
+        return name;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+
+    //Abstract methods
+    public abstract double calculateTuition();
 }
