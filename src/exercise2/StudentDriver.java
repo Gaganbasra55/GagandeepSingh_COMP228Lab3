@@ -33,47 +33,61 @@ public class StudentDriver {
             //Looping through array
             try {
                 //Try and catch blocks are used for validations
-                System.out.println("Enter 1 to create a Full Time Student\n " +
+                System.out.println("Enter 1 to create a Full Time Student\n" +
                         "Enter 2 to create a Part Time Student\n");
                 a = myScanner.next(); //Getting value
                 int option = Integer.parseInt(a); //parsing value
                 System.out.println();
 
+                if (option != 1 && option != 2) //Validation of options
+                    System.out.println("You must enter option 1 or option 2!\n");
 
-                if (option == 1) {
-                    FullTimeStudent newStudent = new FullTimeStudent(name, true); //Creating full time student
-                    studentArray[i] = newStudent; //Populating array
-                    i++;
-                }
-                if (option == 2) {
+                else {
 
-                    try {
+                    System.out.println("Enter student's name\n");
+                    String name = myScanner.next(); //Getting value
+                    System.out.println();
 
-                        System.out.println("Enter student's credit hours\n");
-                        a = myScanner.next(); //Getting value
-                        int creditHours = Integer.parseInt(a);
+                    if (option == 1) {
+                        FullTimeStudent newStudent = new FullTimeStudent(name, true); //Creating full time student
+                        studentArray[i] = newStudent; //Populating array
+                        i++;
+                    }
+                    if (option == 2) {
+
                         try {
 
+                            System.out.println("Enter student's credit hours\n");
+                            a = myScanner.next(); //Getting value
+                            int creditHours = Integer.parseInt(a);
 
-                            PartTimeStudent newStudent = new PartTimeStudent(name, false, creditHours); //Creating part-time Student
-                            studentArray[i] = newStudent; //Populating array
-                            i++;
+                            try {
 
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(e.getMessage());
+                                PartTimeStudent newStudent = new PartTimeStudent(name, false, creditHours); //Creating part-time Student
+                                studentArray[i] = newStudent; //Populating array
+                                i++;
+
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+
+                        } catch (Exception e) {
+                            System.out.println("You must enter a valid value for credit hours!\n");
                         }
-
-                    } catch (Exception e) {
-                        System.out.println("You must enter a valid value for credit hours!\n");
                     }
                 }
-                // display information
 
-                for(Student studentItem : studentArray){
-
-                    System.out.println(studentItem.displayInfo());
-                }
-                myScanner.close();
+            } catch (Exception e) {
+                System.out.println("Invalid option!\n");
             }
+        }
+        // display information
 
+        for (Student studentItem : studentArray) {
+
+            System.out.println(studentItem.displayInfo());
+        }
+        myScanner.close();
+    }
+}
 
