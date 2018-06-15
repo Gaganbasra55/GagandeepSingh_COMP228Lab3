@@ -26,6 +26,30 @@ public class StudentDriver {
                 System.out.println("Enter a valid number!\n");
             }
         }
+        Student[] studentArray = new Student[numberOfStudents];
+        //Creating an array of size numberOfStudents variable
+
+        for (int i = 0; i < studentArray.length; ) {
+            //Looping through array
+            try {
+                //Try and catch blocks are used for validations
+                System.out.println("Enter 1 to create a Full Time Student\n " +
+                        "Enter 2 to create a Part Time Student\n");
+                        a = myScanner.next(); //Getting value
+                int option = Integer.parseInt(a); //parsing value
+                System.out.println();
 
 
-}
+                    if (option == 1) {
+                        FullTimeStudent newStudent = new FullTimeStudent(name, true); //Creating full time student
+                        studentArray[i] = newStudent; //Populating array
+                        i++;
+                    }
+                    if (option == 2) {
+
+                    try {
+
+                        System.out.println("Enter student's credit hours\n");
+                        a = myScanner.next(); //Getting value
+                        int creditHours = Integer.parseInt(a);
+
