@@ -19,28 +19,38 @@ public class InsuranceDriver {
 		while (control < insuranceArray.length) {
 
 
-			//Try and catch blocks are used to validate inputs
-			try {
-				//Getting values from end user
+            //Try and catch blocks are used to validate inputs
+            try {
+                //Getting values from end user
 
-				String typeOfInsurance = JOptionPane.showInputDialog("Enter the type of the insurance: Health or Life");
-				double monthlyCost = Double.parseDouble(JOptionPane.showInputDialog("Enter the Monthly Cost"));
+                String typeOfInsurance = JOptionPane.showInputDialog("Enter the type of the insurance: Health or Life");
+                double monthlyCost = Double.parseDouble(JOptionPane.showInputDialog("Enter the Monthly Cost"));
 
-				//Try and catch blocks are used to validate inputs
-				try {
-					//Type of insurance Health
+                //Try and catch blocks are used to validate inputs
+                try {
+                    //Type of insurance Health
 
-					if (typeOfInsurance.toLowerCase().equals("health")) {
-						Health healthInsurance = new Health(typeOfInsurance, monthlyCost); //Creating health object
-						insuranceArray[control] = healthInsurance;
-						control++;
-					} else
-						JOptionPane.showMessageDialog(null, "Type of insurance unknown by the system! Try again");
-				}
-			} catch (IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
-			}
-		}
+                    if (typeOfInsurance.toLowerCase().equals("health")) {
+                        Health healthInsurance = new Health(typeOfInsurance, monthlyCost); //Creating health object
+                        insuranceArray[control] = healthInsurance;
+                        control++;
+                    } else {
+                        //Type of insurance Life
+
+                        if (typeOfInsurance.toLowerCase().equals("life")) {
+                            Life lifeInsurance = new Life(typeOfInsurance, monthlyCost); //Creating life object
+                            insuranceArray[control] = lifeInsurance;
+                            control++;
+                        } else
+                            JOptionPane.showMessageDialog(null, "Type of insurance unknown by the system! Try again");
+                    }
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 0);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "You must enter a valid number!", "Error", 0);
+            }
+        }
 		try {
 			//Try and catch blocks are used to validate inputs
 
@@ -51,3 +61,16 @@ public class InsuranceDriver {
 			JOptionPane.showMessageDialog(null, "You must enter a valid number for the new cost!", "Error", 0);
 		}
 	}
+    //Loop through array to display information
+
+    int i = 1;
+
+		for(Insurance insuranceItem : insuranceArray){
+
+        JOptionPane.showMessageDialog(null, "Insurance object: "+i+"\n"+insuranceItem.displayInfo(), "Display Information", 1);
+        i++;
+    }
+
+}
+
+}
