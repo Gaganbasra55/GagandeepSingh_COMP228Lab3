@@ -2,59 +2,90 @@ package exercise3;
 
 public abstract class Mortgage implements MortgageConstants {
 
-    private int mortgageNumber;
-    private String customerName;
-    private double mortgageAmount;
-    private double interestRate;
-    private int term;
-    private String termName; // String value for terms
+	private int mortgageNumber; 
+	private String customerName;
+	private double mortgageAmount; 
+	private double interestRate;
+	private int term; //1 = short-term, 2 = mid-term, 3 = long-term 
+	private String termName;
 
-    public Mortgage(int mortgageNumber, String customerName, double mortgageAmount, double interestRate, int term) { //Constructor
+	public Mortgage(int mortgageNumber, String customerName, double mortgageAmount, double interestRate, int term) { //Constructor
 
-        if(mortgageAmount > MortgageConstants.maxMortgageAmount) //Validating mortgage amount against maximum amount
-            throw new IllegalArgumentException("You have exceeded the maximum amount for a mortgage");
+		if(mortgageAmount > MortgageConstants.maxMortgageAmount) //Validating mortgage amount against maximum amount
+			throw new IllegalArgumentException("You have exceeded the maximum amount for a mortgage");
+		
+		if(mortgageAmount < 0) //Validating mortgage amount so it cannot be negative
+			throw new IllegalArgumentException("The mortgage amount cannot be negative");
+		
+		if(interestRate < 0) //Validating interest rate so it cannot be negative
+			throw new IllegalArgumentException("The interest rate cannot be negative");
+		
+		//Assigning values to instance variables
+		
+		this.mortgageNumber = mortgageNumber;
+		this.customerName = customerName;
+		this.mortgageAmount = mortgageAmount;
+		this.interestRate = (interestRate)/100;
 
-        if(mortgageAmount < 0) //Validating mortgage amount so it cannot be negative
-            throw new IllegalArgumentException("The mortgage amount cannot be negative");
+		//Switch case term
 
-        if(interestRate < 0) //Validating interest rate so it cannot be negative
-            throw new IllegalArgumentException("The interest rate cannot be negative");
+        switch (term) {
 
-        //Assigning values to instance variables
+            case 1:
+                this.term = MortgageConstants.shortTerm;
+                this.termName = "Short-term";
+                break;
 
-        this.mortgageNumber = mortgageNumber;
-        this.customerName = customerName;
-        this.mortgageAmount = mortgageAmount;
-        this.interestRate = (interestRate)/100;
+            case 2:
+                this.term = MortgageConstants.midTerm;
+                this.termName = "Mid-term";
+                break;
 
+            case 3:
+                this.term = MortgageConstants.longTerm;
+                this.termName = "Long-term";
+                break;
 
-        //Getter and Setters
-
-        public String getTermName() {
-            return termName;
+            default:
+                this.term = MortgageConstants.shortTerm;
+                this.termName = "Short-term";
+                break;
         }
+	}
 
-        public int getMortgageNumber() {
-            return mortgageNumber;
-        }
+	//Getter and Setters
+	
+	public String getTermName() {
+		return termName;
+	}
 
-        public String getCustomerName() {
-            return customerName;
-        }
+	public int getMortgageNumber() {
+		return mortgageNumber;
+	}
 
-        public double getMortgageAmount() {
-            return mortgageAmount;
-        }
+	public String getCustomerName() {
+		return customerName;
+	}
 
-        public int getTerm() {
-            return term;
-        }
+	public double getMortgageAmount() {
+		return mortgageAmount;
+	}
 
-        public double getInterestRate() {
-            return interestRate;
-        }
+	public int getTerm() {
+		return term;
+	}
 
-        public void setInterestRate(double interestRate) {
-            this.interestRate = interestRate;
-        }
+	public double getInterestRate() {
+		return interestRate;
+	}
 
+	public void setInterestRate(double interestRate) {
+		this.interestRate = interestRate;
+	}
+
+
+	//Abstract method
+
+	public abstract String getMortgageInfo();
+
+}
